@@ -15,13 +15,13 @@ export default p => Component(p, Page);
 const Page: PageEl = (props, state, refresh, getProps) => {
 
   let styles = global.styles
-  let name = "خوش آمدید"
+  let name = "ubooks"
 
   return (
     <div style={{ direction: "rtl", minHeight: "11vh", }}>
       <br-x />
 
-      {state.form == "bookspecs" ? <WindowFloat title='مشخصات کتاب' onclose={() => {
+      {/* {state.form == "bookspecs" ? <WindowFloat title='مشخصات کتاب' onclose={() => {
         delete state.form
         refresh()
       }}>
@@ -32,18 +32,25 @@ const Page: PageEl = (props, state, refresh, getProps) => {
           <f-15>{state.book.title}</f-15>
         </f-c>
 
-        <g-b style={{ backgroundColor: "gray" }} onClick={()=>{
-          if(!state.fav)
-          {
+        <f-c>
+          <f-15>کشور:</f-15>
+          <sp-2 />
+          <f-15>{state.book.country}</f-15>
+        </f-c>
+
+        <g-b style={{ backgroundColor: "gray" }} onClick={() => {
+          if (!state.fav) {
             state.fav = []
           }
           state.fav.push(state.book.title)
         }}>
-          <img src="https://irmapserver.ir/research/12/heart.png" style={{ width: 30, height: 30 }} />
+          <img src="https://cdn.ituring.ir/research/12/heart.png" style={{ width: 30, height: 30 }} />
+
         </g-b>
 
 
-      </WindowFloat> : null}
+      </WindowFloat> : null} */}
+
 
       <Window title={name} style={{ minHeight: 200, margin: 10, width: "calc(100% - 20px)" }}>
         {/* <pre style={{ direction: "ltr" }}>{JSON.stringify(props, null, 2)}</pre> */}
@@ -76,8 +83,9 @@ export async function getServerSideProps(context) {
   let books = await global.db.collection("Books").find({}).toArray()
 
   for (let book of books) {
-    book.imageLink = "https://irmapserver.ir/research/ex/books/" + book.imageLink
+    book.imageLink = "https://cdn.ituring.ir/research/ex/books/" + book.imageLink
   }
+  console.log(books)
 
 
   return {
